@@ -54,7 +54,7 @@ describe('template spec', () => {
   });
 
   //challenge 3
-  it.only('User can delete data user', () => {
+  it.only('User can delete data (user)', () => {
     cy.get('.table td')
     .contains('user')
     .parent()
@@ -69,5 +69,39 @@ describe('template spec', () => {
     // .and('have.text', 'User Deleted Successfully')
       .contains('User Deleted Successfully');
     cy.get('.table').should('not.contain', 'user');
+  });
+
+  it.only('User can delete data (Another Admin)', () => {
+    cy.get('.table td')
+    .contains('Another Admin')
+    .parent()
+    .find('button')
+    .contains('Delete')
+    .click();
+    // make sure sweet alert visible
+    cy.get('.swal-button-container').find('button').contains('OK').click();
+    cy.get('.alert')
+      .should('be.visible')
+      .and('have.class', 'alert-success')
+    // .and('have.text', 'User Deleted Successfully')
+      .contains('User Deleted Successfully');
+    cy.get('.table').should('not.contain', 'Another Admin');
+  });
+
+  it.only('User can delete data (User Baru)', () => {
+    cy.get('.table td')
+    .contains('User Baru')
+    .parent()
+    .find('button')
+    .contains('Delete')
+    .click();
+    // make sure sweet alert visible
+    cy.get('.swal-button-container').find('button').contains('OK').click();
+    cy.get('.alert')
+      .should('be.visible')
+      .and('have.class', 'alert-success')
+    // .and('have.text', 'User Deleted Successfully')
+      .contains('User Deleted Successfully');
+    cy.get('.table').should('not.contain', 'User Baru');
   });
 });
